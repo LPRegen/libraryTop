@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <header>
+      <h1>Library</h1>
+    </header>
+    <div class="new-book">
+      <button id="display-modal">Add new book</button>
+    </div>
+    <div class="book-info">
+      <p class="info-title">Title</p>
+      <p class="info-author">Author</p>
+      <p class="info-pages">Pages</p>
+      <p class="info-read">Read</p>
+      <p class="info-delete">Delete</p>
+    </div>
+    <div class="book-list">
+      <p class="list-title">Don Juan</p>
+      <p class="list-author">Castaneda</p>
+      <p class="list-pages">320</p>
+      <p class="list-read">Yes</p>
+      <p class="list-delete">Delete</p>
+    </div>
+
+    <!-- Modal window -->
+    <div class="modal-bg">
+      <div class="modal">
+        <h2>Add a new book!</h2>
+        <label for="title" class="label-new-book">Title of the book</label>
+        <input
+          type="text"
+          name="title"
+          id="new-title"
+          placeholder="Title"
+          class="input-new-book"
+        />
+        <label for="author" class="label-new-book">Author of the book</label>
+        <input
+          type="text"
+          name="author"
+          id="new-author"
+          placeholder="Author"
+          class="input-new-book"
+        />
+        <label for="pages" class="label-new-book">Pages of the book</label>
+        <input
+          type="number"
+          name="pages"
+          id="new-pages"
+          min="1"
+          placeholder="Number of pages"
+          class="input-new-book"
+        />
+        <label for="read" class="label-new-book"
+          >Have you read this book?</label
+        >
+        <div class="read-modal">
+          <button id="yes-btn" class="read-btn">Yes</button>
+          <button id="no-btn" class="read-btn">No</button>
+        </div>
+        <div class="modal-action">
+          <button class="add-new-book">Add new book</button>
+          <button class="modify-book" style="display: none">
+            Modify this book
+          </button>
+        </div>
+      </div>
+    </div>
+    <script src="./main.js"></script>
+  </body>
+</html>
