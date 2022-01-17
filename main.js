@@ -1,6 +1,5 @@
 // Selectors.
 const bookList = document.querySelector('.book-list');
-const modalBg = document.querySelector('.modal-bg');
 const displayModal = document.getElementById('display-modal');
 const closeModal = document.querySelector('.modal-close');
 const readBtns = Array.from(document.querySelectorAll('.read-btn'));
@@ -149,12 +148,14 @@ addBookBtn.addEventListener('click', function () {
   // pagesIF.value = '';
 });
 
+// Toggle bg-active class
+function toggleModal() {
+  const modalBg = document.querySelector('.modal-bg');
+  modalBg.classList.toggle('bg-active');
+}
+
 // Display modal window
-displayModal.addEventListener('click', function () {
-  modalBg.classList.add('bg-active');
-});
+displayModal.addEventListener('click', toggleModal);
 
 // Close modal window.
-closeModal.addEventListener('click', function () {
-  modalBg.classList.remove('bg-active');
-});
+closeModal.addEventListener('click', toggleModal);
