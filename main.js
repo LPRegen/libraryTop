@@ -8,9 +8,18 @@ const addBookBtn = document.querySelector('.add-new-book');
 
 // Variables.
 let storedBooks = [];
-let bookCount = 0;
 
 let library = {
+  // Add dataset.
+  addDataset() {
+    let displayedBooks = Array.from(document.querySelectorAll('.stored-book'));
+    let dataNum = 0;
+    displayedBooks.forEach((div) => {
+      div.dataset.bookNumber = dataNum;
+      dataNum++;
+    });
+  },
+
   // Creates Html element.
   createHTML(title, author, pages, read) {
     let divElement = document.createElement('div');
@@ -26,12 +35,12 @@ let library = {
 
     // Add class and dataset
     divElement.classList.add('stored-book');
-    divElement.dataset.bookNumber = bookCount;
+
     // Append element.
     bookList.appendChild(divElement);
 
-    // Update bookCount
-    bookCount++;
+    // Add dataset.
+    this.addDataset();
   },
 
   // Check if there is localStorage, otherwise creates it
@@ -52,28 +61,23 @@ let library = {
     }
   },
 
-  deleteBook(bookIdx) {
+  deleteBook(bookIdx, divEl) {
     // Delete with given index.
     storedBooks.splice(bookIdx, 1);
+
     // Update localStorage.
     localStorage.setItem('library', JSON.stringify(storedBooks));
-    // Delete list.
-    bookList.innerHTML = '';
 
-    bookCount = 0;
-    // Iterate over storedBooks.
-    for (let i = 0; i < storedBooks.length; i++) {
-      this.createHTML(
-        storedBooks[i].title,
-        storedBooks[i].author,
-        storedBooks[i].pages,
-        storedBooks[i].read
-      );
-    }
+    // Delete selected element.
+    divEl.remove();
+
+    // Add dataset att. to remaining elements.
+    this.addDataset();
   },
 };
 
 library.storage();
+library.addDataset();
 
 // Create book.
 class Book {
@@ -96,10 +100,10 @@ const deleteBookBtn = Array.from(document.querySelectorAll('.list-delete'));
 
 deleteBookBtn.forEach((delBtn) => {
   delBtn.addEventListener('click', function (e) {
-    console.log(e.target);
     let bookIdx = +e.target.parentElement.dataset.bookNumber;
-    console.log(bookIdx);
-    library.deleteBook(bookIdx);
+    let divEl = e.target.parentElement;
+
+    library.deleteBook(bookIdx, divEl);
   });
 });
 
