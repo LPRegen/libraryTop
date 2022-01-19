@@ -4,6 +4,7 @@ const displayModal = document.getElementById('display-modal');
 const closeModal = document.querySelector('.modal-close');
 const readBtns = Array.from(document.querySelectorAll('.read-btn'));
 const addBookBtn = document.querySelector('.add-new-book');
+const deleteAllBtn = document.querySelector('#delete-all');
 
 // Variables.
 let storedBooks = [];
@@ -28,7 +29,7 @@ let library = {
     <p class="list-title">${title}</p>
     <p class="list-author">${author}</p>
     <p class="list-pages">${pages}</p>
-    <p class="list-read">${read === true ? 'Yes' : 'No'}</p>
+    <button class="list-read">${read === true ? 'Yes' : 'No'}</button>
     <button class="list-delete">Delete</button>
     `;
 
@@ -73,10 +74,36 @@ let library = {
     // Add dataset att. to remaining elements.
     this.addDataset();
   },
+
+  changeReadStatus(bookIdx, btnEl) {
+    // Invert values and change text content.
+    if (storedBooks[bookIdx].read === true) {
+      storedBooks[bookIdx].read = false;
+      btnEl.textContent = 'No';
+    } else {
+      storedBooks[bookIdx].read = true;
+      btnEl.textContent = 'Yes';
+    }
+
+    // Update localStorage.
+    localStorage.setItem('library', JSON.stringify(storedBooks));
+  },
+
+  deleteAllBooks() {
+    // Reset storedBooks variable.
+    storedBooks = [];
+
+    // Update localStorage.
+    this.localStorage();
+
+    // Remove childs.
+    while (bookList.lastChild) {
+      bookList.removeChild(bookList.lastChild);
+    }
+  },
 };
 
 library.storage();
-library.addDataset();
 
 // Create book.
 class Book {
@@ -106,6 +133,17 @@ deleteBookBtn.forEach((delBtn) => {
   });
 });
 
+// Change read status.
+let readStatusBtn = Array.from(document.querySelectorAll('.list-read'));
+
+readStatusBtn.forEach((readBtn) => {
+  readBtn.addEventListener('click', function (e) {
+    let bookIdx = +e.target.parentElement.dataset.bookNumber;
+    let btnEl = e.target;
+    library.changeReadStatus(bookIdx, btnEl);
+  });
+});
+
 // Check pressed readBtn and add "active" class.
 readBtns.forEach((btn) => {
   btn.addEventListener('click', function (e) {
@@ -120,33 +158,47 @@ readBtns.forEach((btn) => {
 addBookBtn.addEventListener('click', function () {
   // Select Input Fields.
   let titleIF = document.querySelector('#new-title');
-  let authorIF = document.querySelector('#new-author');
-  let pagesIF = document.querySelector('#new-pages');
-  let hasBeenRead = document
-    .querySelector('#yes-btn')
-    .classList.contains('active')
-    ? true
-    : false;
 
-  // Create book.
-  let newBook = new Book(
-    titleIF.value,
-    authorIF.value,
-    pagesIF.value,
-    hasBeenRead
-  );
+  // Check if there is value.
+  if (titleIF.value && titleIF.value !== ' ') {
+    let authorIF = document.querySelector('#new-author');
+    let pagesIF = document.querySelector('#new-pages');
+    let hasBeenRead = document
+      .querySelector('#yes-btn')
+      .classList.contains('active')
+      ? true
+      : false;
 
-  // Create html.
-  library.createHTML(titleIF.value, authorIF.value, pagesIF.value, hasBeenRead);
+    // Create book.
+    let newBook = new Book(
+      titleIF.value,
+      authorIF.value,
+      pagesIF.value,
+      hasBeenRead
+    );
 
-  // Store book.
-  newBook.storeThisBook();
+    // Create html.
+    library.createHTML(
+      titleIF.value,
+      authorIF.value,
+      pagesIF.value,
+      hasBeenRead
+    );
 
-  // Clear IF
-  // titleIF.value = '';
-  // authorIF.value = '';
-  // pagesIF.value = '';
+    // Store book.
+    newBook.storeThisBook();
+
+    // Clear IF
+    titleIF.value = '';
+    authorIF.value = '';
+    pagesIF.value = '';
+  } else {
+    // Add red border
+    titleIF.style.border = '2px solid red';
+  }
 });
+
+deleteAllBtn.addEventListener('click', library.deleteAllBooks);
 
 // Toggle bg-active class
 function toggleModal() {
@@ -154,8 +206,6 @@ function toggleModal() {
   modalBg.classList.toggle('bg-active');
 }
 
-// Display modal window
+// Display and close modal window
 displayModal.addEventListener('click', toggleModal);
-
-// Close modal window.
 closeModal.addEventListener('click', toggleModal);
