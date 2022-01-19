@@ -4,15 +4,22 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Comfortaa&family=Exo+2:wght@300&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="style.css" />
-    <title>Document</title>
+    <title>Library</title>
   </head>
   <body>
     <header>
       <h1>Library</h1>
     </header>
-    <div class="new-book">
+    <div class="action-btns">
       <button id="display-modal">Add new book</button>
+      <button id="delete-all">Delete all books</button>
     </div>
     <div class="book-info">
       <p class="info-title">Title</p>
@@ -21,13 +28,7 @@
       <p class="info-read">Read</p>
       <p class="info-delete">Delete</p>
     </div>
-    <div class="book-list">
-      <p class="list-title">Don Juan</p>
-      <p class="list-author">Castaneda</p>
-      <p class="list-pages">320</p>
-      <p class="list-read">Yes</p>
-      <p class="list-delete">Delete</p>
-    </div>
+    <div class="book-list"></div>
 
     <!-- Modal window -->
     <div class="modal-bg">
@@ -40,6 +41,7 @@
           id="new-title"
           placeholder="Title"
           class="input-new-book"
+          maxlength="25"
         />
         <label for="author" class="label-new-book">Author of the book</label>
         <input
@@ -48,6 +50,7 @@
           id="new-author"
           placeholder="Author"
           class="input-new-book"
+          maxlength="25"
         />
         <label for="pages" class="label-new-book">Pages of the book</label>
         <input
@@ -55,15 +58,17 @@
           name="pages"
           id="new-pages"
           min="1"
+          value="1"
           placeholder="Number of pages"
           class="input-new-book"
+          maxlength="4"
         />
         <label for="read" class="label-new-book"
           >Have you read this book?</label
         >
         <div class="read-modal">
           <button id="yes-btn" class="read-btn">Yes</button>
-          <button id="no-btn" class="read-btn">No</button>
+          <button id="no-btn" class="read-btn active">No</button>
         </div>
         <div class="modal-action">
           <button class="add-new-book">Add new book</button>
@@ -71,6 +76,7 @@
             Modify this book
           </button>
         </div>
+        <span class="modal-close"> X </span>
       </div>
     </div>
     <script src="./main.js"></script>

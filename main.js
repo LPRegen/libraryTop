@@ -71,7 +71,7 @@ let library = {
     storedBooks.splice(bookIdx, 1);
 
     // Update localStorage.
-    this.localStorage();
+    this.updateLocalStorage();
 
     // Delete selected element.
     divEl.remove();
@@ -99,7 +99,7 @@ let library = {
     storedBooks = [];
 
     // Update localStorage.
-    this.updateLocalStorage();
+    localStorage.setItem('library', JSON.stringify(storedBooks));
 
     // Remove childs.
     while (bookList.lastChild) {
@@ -138,9 +138,10 @@ deleteBookBtn.forEach((delBtn) => {
   });
 });
 
-// Change read status.
+// Select all read btns on .list-read
 let readStatusBtn = Array.from(document.querySelectorAll('.list-read'));
 
+// Change read status.
 readStatusBtn.forEach((readBtn) => {
   readBtn.addEventListener('click', function (e) {
     let bookIdx = +e.target.parentElement.dataset.bookNumber;
