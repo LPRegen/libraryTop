@@ -62,7 +62,7 @@ let library = {
         );
       }
     } else {
-      this.localStorage();
+      this.updateLocalStorage();
     }
   },
 
@@ -91,7 +91,7 @@ let library = {
     }
 
     // Update localStorage.
-    localStorage.setItem('library', JSON.stringify(storedBooks));
+    this.updateLocalStorage();
   },
 
   deleteAllBooks() {
@@ -99,7 +99,7 @@ let library = {
     storedBooks = [];
 
     // Update localStorage.
-    this.localStorage();
+    this.updateLocalStorage();
 
     // Remove childs.
     while (bookList.lastChild) {
@@ -122,7 +122,7 @@ class Book {
   // Store book.
   storeThisBook() {
     storedBooks.push(this);
-    library.localStorage();
+    library.updateLocalStorage();
   }
 }
 
