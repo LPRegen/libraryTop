@@ -10,6 +10,11 @@ const deleteAllBtn = document.querySelector('#delete-all');
 let storedBooks = [];
 
 let library = {
+  // Update localStorage
+  updateLocalStorage() {
+    localStorage.setItem('library', JSON.stringify(storedBooks));
+  },
+
   // Add dataset.
   addDataset() {
     let displayedBooks = Array.from(document.querySelectorAll('.stored-book'));
@@ -57,7 +62,7 @@ let library = {
         );
       }
     } else {
-      localStorage.setItem('library', JSON.stringify(storedBooks));
+      this.localStorage();
     }
   },
 
@@ -66,7 +71,7 @@ let library = {
     storedBooks.splice(bookIdx, 1);
 
     // Update localStorage.
-    localStorage.setItem('library', JSON.stringify(storedBooks));
+    this.localStorage();
 
     // Delete selected element.
     divEl.remove();
@@ -117,7 +122,7 @@ class Book {
   // Store book.
   storeThisBook() {
     storedBooks.push(this);
-    localStorage.setItem('library', JSON.stringify(storedBooks));
+    library.localStorage();
   }
 }
 
