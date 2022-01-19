@@ -8,7 +8,7 @@ The objective of this project is to use Object Oriented Programming as a design 
 
 ### Features
 
-- [x] Add localStorage support.
+- [x] ~~Add localStorage support.~~
 - [ ] Modify books.
 - [ ] Responsive design.
 - [ ] Obtain book information through ISBN.
