@@ -39,7 +39,6 @@ header {
 }
 
 .action-btns > button {
-  /* color: var(--actionColor); */
   background-color: var(--actionColor);
   height: 5vh;
   width: 20vw;
@@ -55,6 +54,7 @@ header {
   display: grid;
   grid-template-columns: repeat(10, 1fr);
   gap: 5px;
+  margin-bottom: 0.5vh;
 }
 
 .book-info,
@@ -104,7 +104,6 @@ header {
 /* Read and delete btns. */
 .list-delete,
 .list-read {
-  margin-bottom: 0.5vh;
   height: 2vh;
   border: none;
   text-decoration: none;
@@ -142,7 +141,6 @@ header {
   height: 100vh;
   top: 0;
   left: 0;
-  /* !Modify */
   background-color: rgba(0, 0, 0, 0.5);
   opacity: 0;
   color: white;
