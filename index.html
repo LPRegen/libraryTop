@@ -41,7 +41,6 @@
           id="new-title"
           placeholder="Title"
           class="input-new-book"
-          maxlength="25"
         />
         <label for="author" class="label-new-book">Author of the book</label>
         <input
@@ -50,16 +49,14 @@
           id="new-author"
           placeholder="Author"
           class="input-new-book"
-          maxlength="25"
         />
         <label for="pages" class="label-new-book">Pages of the book</label>
         <input
           type="number"
           name="pages"
+          oninput="this.value=this.value.slice(0,this.maxLength)"
           id="new-pages"
-          min="1"
           value="1"
-          placeholder="Number of pages"
           class="input-new-book"
           maxlength="4"
         />
