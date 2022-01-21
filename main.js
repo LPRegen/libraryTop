@@ -127,7 +127,7 @@ class Book {
 }
 
 // Delete book.
-const deleteBookBtn = Array.from(document.querySelectorAll('.list-delete'));
+let deleteBookBtn = Array.from(document.querySelectorAll('.list-delete'));
 
 deleteBookBtn.forEach((delBtn) => {
   delBtn.addEventListener('click', function (e) {
@@ -202,6 +202,28 @@ addBookBtn.addEventListener('click', function () {
     // Add red border
     titleIF.style.border = '2px solid red';
   }
+
+  deleteBookBtn = Array.from(document.querySelectorAll('.list-delete'));
+
+  deleteBookBtn.forEach((delBtn) => {
+    delBtn.addEventListener('click', function (e) {
+      let bookIdx = +e.target.parentElement.dataset.bookNumber;
+      let divEl = e.target.parentElement;
+
+      library.deleteBook(bookIdx, divEl);
+    });
+  });
+
+  readStatusBtn = Array.from(document.querySelectorAll('.list-read'));
+
+  // Change read status.
+  readStatusBtn.forEach((readBtn) => {
+    readBtn.addEventListener('click', function (e) {
+      let bookIdx = +e.target.parentElement.dataset.bookNumber;
+      let btnEl = e.target;
+      library.changeReadStatus(bookIdx, btnEl);
+    });
+  });
 });
 
 deleteAllBtn.addEventListener('click', library.deleteAllBooks);
