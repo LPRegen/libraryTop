@@ -92,13 +92,46 @@ header {
 }
 
 .info-read,
-.list-info {
+.list-read {
   text-align: center;
 }
 
 .info-delete,
 .list-delete {
   text-align: center;
+}
+
+/* Read and delete btns. */
+.list-delete,
+.list-read {
+  margin-bottom: 0.5vh;
+  height: 2vh;
+  border: none;
+  text-decoration: none;
+  background-color: var(--backColor);
+  border-radius: 5px;
+}
+
+/* Read and delete btns on hover. */
+.list-read:hover {
+  background-color: rgba(56, 190, 56, 0.8);
+}
+
+.list-delete:hover {
+  background-color: rgba(216, 50, 50, 0.8);
+}
+
+.list-title,
+.list-author {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.list-title:hover,
+.list-author:hover {
+  white-space: normal;
+  overflow: visible;
 }
 
 /* Modal window */
