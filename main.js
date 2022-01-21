@@ -27,21 +27,36 @@ let library = {
 
   // Creates Html element.
   createHTML(title, author, pages, read) {
+    // Create HTML Elements.
     let divElement = document.createElement('div');
+    let paraTitle = document.createElement('p');
+    let paraAuthor = document.createElement('p');
+    let paraPages = document.createElement('p');
+    let btnRead = document.createElement('button');
+    let btnDelete = document.createElement('button');
 
-    // Create inner HTML.
-    divElement.innerHTML = `
-    <p class="list-title">${title}</p>
-    <p class="list-author">${author}</p>
-    <p class="list-pages">${pages}</p>
-    <button class="list-read">${read === true ? 'Yes' : 'No'}</button>
-    <button class="list-delete">Delete</button>
-    `;
-
-    // Add class and dataset
+    // Assign class names.
     divElement.classList.add('stored-book');
+    paraTitle.classList.add('list-title');
+    paraAuthor.classList.add('list-author');
+    paraPages.classList.add('list-pages');
+    btnRead.classList.add('list-read');
+    btnDelete.classList.add('list-delete');
 
-    // Append element.
+    // textContent.
+    paraTitle.textContent = title;
+    paraAuthor.textContent = author;
+    paraPages.textContent = pages;
+    btnRead.textContent = `${read === true ? 'Yes' : 'No'}`;
+    btnDelete.textContent = 'Delete';
+    // Append elements.
+    divElement.appendChild(paraTitle);
+    divElement.appendChild(paraAuthor);
+    divElement.appendChild(paraPages);
+    divElement.appendChild(btnRead);
+    divElement.appendChild(btnDelete);
+
+    // Append container element.
     bookList.appendChild(divElement);
 
     // Add dataset.
