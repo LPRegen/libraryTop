@@ -198,6 +198,11 @@ addBookBtn.addEventListener('click', function () {
     titleIF.value = '';
     authorIF.value = '';
     pagesIF.value = '';
+
+    // Clear all elements inside book
+    bookList.innerHTML = '';
+
+    library.storage();
   } else {
     // Add red border
     titleIF.style.border = '2px solid red';
